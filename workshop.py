@@ -104,10 +104,6 @@ class KinematicsEngine:
     self.backend = backend.lower()
     self.model_dir = Path(model_dir)
     self.model_dir.mkdir(exist_ok=True)
-<<<<<<< HEAD
-    # Renamed URDF to so101.urdf during asset download
-=======
->>>>>>> 73f0ecf (Initial commit)
     self.urdf_path = self.model_dir / "so101_new_calib.urdf"
 
     self.solver = None
@@ -117,14 +113,8 @@ class KinematicsEngine:
         f"\n⚙️ Initializing Kinematics with backend: {self.backend.upper()}..."
     )
 
-<<<<<<< HEAD
-    # 1. Download assets if missing (Shared by LeRobot and MuJoCo)
-    if self.backend in ["lerobot", "mujoco"]:
-      self._ensure_assets()
-=======
     # 1. Download common assets if missing
     self._ensure_assets()
->>>>>>> 73f0ecf (Initial commit)
 
     # 2. Setup specific backend
     if self.backend == "lerobot":
@@ -217,17 +207,6 @@ class KinematicsEngine:
         f"   ❌ Failed to import Argo controls, files or prereqs"
         " may be missing. Error: {e}"
       )
-<<<<<<< HEAD
-
-      loader = URDF_loader()
-      loader.load(self.urdf_path)
-      self.argo_model = RobotModel(loader)
-      self.solver = URDF_Kinematics()
-      print("   ✅ Argo/Custom Kinematics ready.")
-    except ImportError as e:
-      print(
-          f"   ❌ Failed to import Argo libraries. Error: {e}"
-=======
     try:
       loader = URDF_loader()
       loader.load(str(self.urdf_path))
@@ -237,7 +216,6 @@ class KinematicsEngine:
     except Exception as e:
       print(
           f"   ❌ Failed to ready Argo Kinematics. Error: {e}"
->>>>>>> 73f0ecf (Initial commit)
       )
       raise
 
@@ -440,13 +418,8 @@ def calibrate_system(cap, board_origin_robot_m):
           cv2.LINE_AA,
       )
 
-<<<<<<< HEAD
-    show_image(disp, "Calibration Verification (Press 'q' to close)")
-    cv2.waitKey(0)
-=======
     show_image(disp, "Calibration Verification (Press 'q' to close or wait 10s)")
     cv2.waitKey(10000)
->>>>>>> 73f0ecf (Initial commit)
     cv2.destroyAllWindows()
 
     return H, 0.0  # Return H matrix and z_surface

@@ -159,19 +159,6 @@ After successful calibration, the script will enter an interactive loop:
    </td>
   </tr>
   <tr>
-<<<<<<< HEAD
-   <td style="background-color: #f8fafd">--calibration-dir
-   </td>
-   <td style="background-color: #f8fafd">Directory containing the arm calibration files, when not using the default location or the lerobot-calibrate command.
-   </td>
-   <td style="background-color: #f8fafd">N/A
-   </td>
-   <td style="background-color: #f8fafd"><strong>Yes</strong>
-   </td>
-  </tr>
-  <tr>
-=======
->>>>>>> 73f0ecf (Initial commit)
    <td style="background-color: #f8fafd">--camera-index
    </td>
    <td style="background-color: #f8fafd">Index of the USB camera (try 0, 1, or 2).
@@ -182,8 +169,6 @@ After successful calibration, the script will enter an interactive loop:
    </td>
   </tr>
   <tr>
-<<<<<<< HEAD
-=======
    <td style="background-color: #f8fafd">--calibration-dir
    </td>
    <td style="background-color: #f8fafd">Directory containing the arm calibration files, when not using the default location or the lerobot-calibrate command.
@@ -194,7 +179,6 @@ After successful calibration, the script will enter an interactive loop:
    </td>
   </tr>
   <tr>
->>>>>>> 73f0ecf (Initial commit)
    <td style="background-color: #f8fafd">--backend
    </td>
    <td style="background-color: #f8fafd">Kinematics solver: lerobot, argo, or mujoco.
