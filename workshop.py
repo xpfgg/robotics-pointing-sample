@@ -204,8 +204,8 @@ class KinematicsEngine:
       from scripts.kinematics import URDF_Kinematics
     except ImportError as e:
       print(
-        f"   ❌ Failed to import Argo controls, files or prereqs"
-        " may be missing. Error: {e}"
+        "   ❌ Failed to import Argo controls, files or prereqs"
+        f" may be missing. Error: {e}"
       )
     try:
       loader = URDF_loader()
