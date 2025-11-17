@@ -100,7 +100,7 @@ class KinematicsEngine:
   math library. Handles asset downloading automatically.
   """
 
-  def __init__(self, backend="lerobot", model_dir="SO101"):
+  def __init__(self, backend="lerobot", model_dir="third_party/SO101"):
     self.backend = backend.lower()
     self.model_dir = Path(model_dir)
     self.model_dir.mkdir(exist_ok=True)
@@ -195,7 +195,7 @@ class KinematicsEngine:
 
   def _setup_argo(self):
     """Sets up the custom 'Argo' control library/solver."""
-    self.argo_dir = Path("Argo-Robot/controls")
+    self.argo_dir = Path("third_party/Argo-Robot/controls")
     
     try:
       if str(self.argo_dir.resolve()) not in sys.path:
