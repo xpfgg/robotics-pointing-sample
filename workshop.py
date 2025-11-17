@@ -430,6 +430,7 @@ def calibrate_system(cap, board_origin_robot_m):
 
 def main(args):
   # --- 1. Initialization ---
+  print("Setting things up, might be slow the first time...")
 
   # Kinematics Engine Setup
   kin_engine = KinematicsEngine(backend=args.backend)
