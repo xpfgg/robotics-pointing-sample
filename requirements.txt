@@ -1,0 +1,8 @@
+opencv-python
+numpy
+scipy
+pillow
+google-genai
+mujoco
+
+lerobot[feetech]

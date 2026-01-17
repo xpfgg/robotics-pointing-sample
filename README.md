@@ -1,8 +1,8 @@
 # Vision-Guided Manipulation with Gemini & Robot Arms
 
 This repository contains a demonstration of a Vision-Language-Action (VLA)
-system using the SO-101 robot arm, an attached USB camera, and the Gemini
-Robotics ER 1.5 model for zero-shot object detection and pointing.
+system using the SO-101 robot arm, an attached USB camera, and Gemini
+models for zero-shot object detection and pointing.
 
 ## 1. Prerequisites
 
@@ -36,11 +36,34 @@ The recommended way to set up your environment is based on the
 4.  **Install Python dependencies:**
 
     ```bash
-    pip install opencv-python numpy scipy pillow google-genai \
-    "lerobot[feetech]" mujoco urchin placo requests
+    pip install -r requirements.txt
     ```
 
-## 2. Get configuration parameters and run the script
+## 2. Conceptual Walkthrough
+
+This script (`workshop.py`) integrates vision, language, and action into a single loop. Here is how it works:
+
+### 1. Initialization
+- **Robot**: Connects to the SO-101 arm via serial port.
+- **Camera**: Opens the USB camera for video capture.
+- **Gemini**: Initializes the Google GenAI client with your API key.
+- **Kinematics**: Loads the MuJoCo physics engine to calculate how to move the robot's joints to reach specific 3D coordinates (Inverse Kinematics).
+
+### 2. Calibration (The "Eye-Hand" Connection)
+Before the robot can point at what it sees, it needs to know how pixels in the camera image relate to meters in the real world.
+- The script looks for a **ChArUco board** on the table.
+- It calculates a **Homography Matrix**, which maps 2D image points to 2D table coordinates.
+- This calibration is saved to `homography_calibration.npy` so you don't have to recalibrate every time.
+
+### 3. The Main Loop (Vision-Language-Action)
+Once calibrated, the system enters a continuous loop:
+1.  **Observe**: The camera shows a live feed of the workspace.
+2.  **Ask**: You type a natural language query (e.g., "Where is the blue block?").
+3.  **Think (Gemini)**: The system sends the current image and your text to Gemini. Gemini analyzes the image and returns the 2D pixel coordinates of the object.
+4.  **Ground**: The script uses the calibration matrix to convert those pixels into real-world robot coordinates (X, Y, Z).
+5.  **Act**: The robot calculates the necessary joint angles (Inverse Kinematics) and moves its arm to point at the object.
+
+## 3. Get configuration parameters and run the script
 
 To identify the USB port for your robot arm, use the
 [`lerobot-find-port`](https://huggingface.co/docs/lerobot/en/so101#1-find-the-usb-ports-associated-with-each-arm)
@@ -176,16 +199,6 @@ After successful calibration, the script will enter an interactive loop:
    <td style="background-color: #f8fafd">N/A
    </td>
    <td style="background-color: #f8fafd"><strong>No</strong>
-   </td>
-  </tr>
-  <tr>
-   <td style="background-color: #f8fafd">--backend
-   </td>
-   <td style="background-color: #f8fafd">Kinematics solver: lerobot, argo, or mujoco.
-   </td>
-   <td style="background-color: #f8fafd">argo
-   </td>
-   <td style="background-color: #f8fafd">No
    </td>
   </tr>
   <tr>
