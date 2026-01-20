@@ -151,7 +151,7 @@ def wait_and_show(
 
 
 def move_to_joints(
-    robot: SO101Follower,
+    robot: Optional[SO101Follower],
     target_joints_deg: List[float],
     gripper_pos: float = 0,
     duration: float = 2.0,
@@ -360,7 +360,7 @@ class KinematicsEngine:
 # --- Core Logic Functions ---
 
 def perform_move(
-    bot: Any,
+    bot: Optional[SO101Follower],
     engine: KinematicsEngine,
     target_xyz: Union[List[float], np.ndarray],
     gripper_pos: float = 0,
@@ -437,7 +437,7 @@ def confirm_action(message: str) -> None:
 
 
 def get_object_center_gemini(
-    client: Any, 
+    client: genai.Client,
     image_bgr: np.ndarray, 
     target_name: str,
     model_name: str = "gemini-3-flash-preview",
@@ -798,9 +798,9 @@ def get_calibration(
 # --- Main Loop ---
 
 def main_loop(
-    robot: SO101Follower,
+    robot: Optional[SO101Follower],
     kin_engine: KinematicsEngine,
-    client: Any,
+    client: genai.Client,
     cap: cv2.VideoCapture,
     h_matrix: np.ndarray,
     z_surface: float,
