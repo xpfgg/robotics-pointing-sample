@@ -45,7 +45,7 @@ This script (`workshop.py`) integrates vision, language, and action through into
 - **Robot**: Connects to the SO-101 arm via serial port.
 - **Camera**: Opens the USB camera for video capture.
 - **Gemini**: Initializes the Google GenAI client with your API key.
-- **Kinematics**: Loads MuJoCo physics engine and calculates how to move the robot's joints to reach specific 3D coordinates through provided Inverse Kinematics.
+- **Kinematics**: Loads a MuJoCo model of the robot to calculate the joint angles required to reach specific 3D coordinates using Inverse Kinematics.
 
 ### 2. Calibration (The "Eye-Hand" Connection)
 Before the robot can point at what it sees, it needs to know how pixels in the camera image relate to meters in the real world.
